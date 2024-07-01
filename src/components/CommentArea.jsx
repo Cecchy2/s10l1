@@ -1,21 +1,35 @@
-import React from "react";
+import React, { Component } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import CommentList from "./CommentList";
 import AddComment from "./AddComment";
 
-const CommentArea = ({ recensioni, selectedCardId }) => {
-  console.log("Rendering CommentArea with recensioni:", recensioni); // Debug log
+class CommentArea extends Component {
+  componentDidUpdate(prevProps) {
+    if (prevProps.selectedCardId !== this.props.selectedCardId && this.props.selectedCardId) {
+      this.props.fetchReviews();
+    }
+  }
 
-  return (
-    <Container>
-      <Row>
-        <Col>
-          <CommentList recensioni={recensioni} />
-          <AddComment selectedCardId={selectedCardId} />
-        </Col>
-      </Row>
-    </Container>
-  );
-};
+  render() {
+    const { recensioni, selectedCardId } = this.props;
+
+    return (
+      <Container>
+        <Row>
+          <Col>
+            {selectedCardId ? (
+              <>
+                <CommentList recensioni={recensioni} />
+                <AddComment selectedCardId={selectedCardId} />
+              </>
+            ) : (
+              <p className="text-center">Select a book to see reviews</p>
+            )}
+          </Col>
+        </Row>
+      </Container>
+    );
+  }
+}
 
 export default CommentArea;

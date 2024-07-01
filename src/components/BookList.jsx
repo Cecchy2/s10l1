@@ -10,14 +10,14 @@ const BookList = ({ books, onCardClick, selectedCardId, recensioni }) => {
           <Row>
             {books.map((book) => (
               <Col xs={4} key={book._id}>
-                <SingleBook book={book} onCardClick={onCardClick} />
+                <SingleBook book={book} onCardClick={onCardClick} isSelected={selectedCardId === book._id} />
               </Col>
             ))}
           </Row>
         </Col>
         <Col xs={4}>
           <h3 className="text-center">Book’s Reviews</h3>
-          {selectedCardId && <CommentArea recensioni={recensioni} selectedCardId={selectedCardId} />}
+          <CommentArea recensioni={recensioni} selectedCardId={selectedCardId} />
         </Col>
       </Row>
     </Container>
