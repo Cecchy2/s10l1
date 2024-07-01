@@ -6,11 +6,14 @@ import history from "../data/history.json";
 import romance from "../data/romance.json";
 import scifi from "../data/scifi.json";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import CommentArea from "./CommentArea";
 
 class BookList extends Component {
   state = {
     books: fantasy,
     searchBar: "",
+    selected: false,
+    selectedBookAsin: null,
   };
 
   setBooks = (genere) => {
@@ -62,19 +65,26 @@ class BookList extends Component {
           </Col>
         </Row>
         <Row>
-          {filteredBooks.map((book, index) => {
-            return (
-              <Col xs={12} md={6} xl={3} key={index}>
+          <Col xs={12} md={6} xl={3}>
+            {filteredBooks.map((book, index) => {
+              return (
                 <SingleBook
+                  key={index}
                   img={book.img}
                   title={book.title}
                   price={book.price}
                   category={book.category}
                   asin={book.asin}
+                  onClick={() => this.setState({ selectedBookAsin: book.asin })}
+                  className={this.state.selectedBookAsin === book.asin ? "selected-card" : ""}
                 />
-              </Col>
-            );
-          })}
+              );
+            })}
+          </Col>
+          <Col xs={4}>
+            <h3>Reviews</h3>
+            {this.state.selectedBookAsin && <CommentArea asin={this.state.selectedBookAsin} />}
+          </Col>
         </Row>
       </Container>
     );
