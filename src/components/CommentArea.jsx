@@ -29,7 +29,13 @@ class CommentArea extends Component {
   };
 
   componentDidMount() {
-    this.fetchReviews();
+    this.fetchReviews(this.props.asin);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.asin !== this.props.asin) {
+      this.fetchReviews(this.props.asin);
+    }
   }
 
   render() {
@@ -38,7 +44,7 @@ class CommentArea extends Component {
         <Row>
           <Col>
             <CommentList recensioni={this.state.recensioni} />
-            <AddComment asin={this.props.asin} onAddComment={this.addComment} />
+            <AddComment asin={this.props.asin} onAddComment={() => this.fetchReviews(this.props.asin)} />
           </Col>
         </Row>
       </Container>
