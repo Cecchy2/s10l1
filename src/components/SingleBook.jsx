@@ -1,22 +1,28 @@
 import { Component } from "react";
 import { Card } from "react-bootstrap";
+import CommentArea from "./CommentArea";
 
 class SingleBook extends Component {
-  handleClick = () => {
-    this.props.onCardClick(this.props.book._id);
+  state = {
+    selected: false,
   };
 
   render() {
-    const { book, isSelected } = this.props;
     return (
-      <Card onClick={this.handleClick} className={isSelected ? "selected-card" : ""}>
-        <Card.Img variant="top" src={book.img} />
-        <Card.Body>
-          <Card.Title>{book.title}</Card.Title>
-          <Card.Text>{book.price} &euro;</Card.Text>
-          <Card.Text>{book.category}</Card.Text>
-        </Card.Body>
-      </Card>
+      <>
+        <Card
+          onClick={() => this.setState({ selected: !this.state.selected })}
+          className={this.state.selected ? "selected-card" : ""}
+        >
+          <Card.Img variant="top" src={this.props.img} />
+          <Card.Body>
+            <Card.Title>{this.props.title}</Card.Title>
+            <Card.Text>{this.props.price} &euro;</Card.Text>
+            <Card.Text>{this.props.category}</Card.Text>
+          </Card.Body>
+          {this.state.selected && <CommentArea asin={this.props.asin} />}
+        </Card>
+      </>
     );
   }
 }
