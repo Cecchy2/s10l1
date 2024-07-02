@@ -40,14 +40,10 @@ class CommentArea extends Component {
 
   render() {
     return (
-      <Container>
-        <Row>
-          <Col>
-            <CommentList recensioni={this.state.recensioni} />
-            <AddComment asin={this.props.asin} onAddComment={() => this.fetchReviews(this.props.asin)} />
-          </Col>
-        </Row>
-      </Container>
+      <>
+        <CommentList recensioni={this.state.recensioni} />
+        <AddComment asin={this.props.asin} onAddComment={() => this.fetchReviews(this.props.asin)} />
+      </>
     );
   }
 }

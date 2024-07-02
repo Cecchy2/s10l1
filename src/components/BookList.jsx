@@ -46,7 +46,7 @@ class BookList extends Component {
           </Col>
         </Row>
         <Row>
-          <Col>
+          <Col className="d-flex justify-content-center">
             <Button variant="secondary" onClick={() => this.setBooks(fantasy)} className="m-4">
               Fantasy
             </Button>
@@ -65,7 +65,7 @@ class BookList extends Component {
           </Col>
         </Row>
         <Row>
-          <Col xs={12} md={6} xl={3}>
+          <Col md={4}>
             {filteredBooks.map((book, index) => {
               return (
                 <SingleBook
@@ -81,7 +81,7 @@ class BookList extends Component {
               );
             })}
           </Col>
-          <Col xs={4}>
+          <Col xs={3}>
             <h3>Reviews</h3>
             {this.state.selectedBookAsin && <CommentArea asin={this.state.selectedBookAsin} />}
           </Col>

@@ -5,13 +5,17 @@ import MyFooter from "./components/MyFooter";
 import Welcome from "./components/Welcome";
 
 import BookList from "./components/BookList";
+import { Container } from "react-bootstrap";
 
 function App() {
   return (
     <div className="App">
       <MyNav />
-      <Welcome />
-      <BookList />
+      <Container>
+        <Welcome />
+
+        <BookList />
+      </Container>
       <MyFooter />
     </div>
   );
